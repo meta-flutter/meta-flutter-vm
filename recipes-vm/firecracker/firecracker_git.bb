@@ -24,6 +24,8 @@ PV:append = ".ad71630931"
 SRC_URI += "\
     gitsm://github.com/firecracker-microvm/firecracker.git;protocol=https;nobranch=1;branch=master \
     file://0001-use-prebuilt-seccompiler.patch \
+    file://hello-conf.json \
+    file://hello-firecracker.sh \
     "
 
 inherit cargo features_check
@@ -177,3 +179,10 @@ do_configure:prepend:aarch64() {
     cp ${S}/resources/seccomp/aarch64-unknown-linux-musl.json \
         ${S}/resources/seccomp/aarch64-poky-linux-musl.json
 }
+
+do_install:append() {
+    install -Dm644 ${WORKDIR}/hello-conf.json ${D}${datadir}/firecracker/hello-conf.json
+    install -Dm755 ${WORKDIR}/hello-firecracker.sh ${D}${datadir}/firecracker/hello-firecracker.sh
+}
+
+FILES-${PN} += "${datadir}"
