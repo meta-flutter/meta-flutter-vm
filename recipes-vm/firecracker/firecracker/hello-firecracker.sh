@@ -27,4 +27,4 @@ echo "Saved kernel file to $dest_kernel and root block device to $dest_rootfs."
 
 rm -rf /tmp/firecracker.socket |true
 
-firecracker --api-sock /tmp/firecracker.socket --config-file hello-conf.json
+firecracker --api-sock /tmp/firecracker.socket --config-file /usr/share/firecracker/hello-conf.json
